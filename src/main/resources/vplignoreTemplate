@@ -1,0 +1,13 @@
+# Enter here name of files that should be excluded of
+# the vpl with a full filename from the project root.
+# The character * can be used as wildcard
+# To exclude a whole directory with all its subdirectories, use dir/** .
+
+.idea
+.idea/**
+out
+out/**
+workspace.xml
+*.iml
+.moodlevpl
+.vplignore

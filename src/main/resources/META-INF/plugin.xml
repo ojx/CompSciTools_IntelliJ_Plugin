@@ -1,0 +1,95 @@
+<idea-plugin>
+    <!-- Unique identifier of the plugin -->
+    <id>cstools.moodle.plugin</id>
+
+    <!-- Name -->
+    <name>CompSci Tools</name>
+
+    <version>1.1.0</version>
+
+    <!-- Contact -->
+    <vendor email="info@compsci.tools" url="https://compsci.tools">CompSci Tools</vendor>
+
+    <!-- Description of the plugin -->
+    <description><![CDATA[
+    <p>The extension lets you download, upload and evaluate the files required by a CompSci Tools programming labs from the environment of IntelliJ.
+    You can also edit and run these files locally, thereby taking advantage of the IntelliJ build tools.</p>
+    <ul><li>Simple copy and paste the webservices URL from assignment description pages</li>
+    <li>Upload / download tasks managed by a simple button click</li>
+    <li>Activity tree view for remote evaluation result</li></ul>
+   ]]></description>
+
+    <!-- Product and plugin compatibility requirements -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add a new section to the "New Project" window for the plugin -->
+        <moduleBuilder builderClass="module.CompSciToolsModuleBuilder" id="COMPSCI_TOOL_TYPE"/>
+
+      <!--  <moduleType id="COMPSCI_TOOL_TYPE" implementationClass="module.CompSciToolsModuleType"/>-->
+
+        <!-- Allows you to have a timer when a person performs an exam with a rendering at a specific time -->
+        <statusBarWidgetFactory implementation="clock.ClockStatusBarWidgetFactory" id="Caseine-clock" order="first"/>
+
+        <!-- Allows you to have the number of free attempts remaining for an exam -->
+        <statusBarWidgetFactory implementation="evaluation.EvaluationStatusBarWidgetFactory" id="CompSciTools-Evaluation" order="first, after Caseine-clock" />
+
+        <!-- Add a new section to the "Settings" window for the plugin -->
+        <applicationConfigurable parentId="tools" instance="settings.SettingsConfigurable"
+                                 id="settings.SettingsConfigurable"
+                                 displayName="CompSci Tools Settings"/>
+
+        <!-- Allow using the Storage created for the plugin -->
+        <applicationService serviceImplementation="service.PersistentStorage"/>
+
+        <!-- Add a new window to the right of IntelliJ for the plugin -->
+        <toolWindow id="CompSci Tools" secondary="false" icon="ui.icons.CompSciToolsIcons.CompSciTools" anchor="right"
+                    factoryClass="sideWindow.CompSciToolsSideWindowFactory"/>
+
+        <!-- Add a keyboard listener when typing in project files -->
+        <typedHandler implementation="comments.Highlighter"/>
+
+        <!-- Use notification to display messages instead of popup window -->
+        <notificationGroup displayType="BALLOON" id="CompSci Tools Notification Group"/>
+
+        <postStartupActivity implementation="sideWindow.CompSciToolsSideWindowFactory"/>
+    </extensions>
+
+    <!-- Add four new buttons for the plugin. They can be found when right-clicking on the project, in the Tools menu and at the top right of the IntelliJ window-->
+    <actions>
+        <!-- The menu in the Tools menu -->
+        <group id="CompSciTools.Menu"
+               class="action.CompSciToolsActionGroup"
+               text="CompSci Tools" description="CompSci tools"
+               popup="true" icon="ui.icons.CompSciToolsIcons.CompSciTools">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </group>
+
+        <!-- The Reset button -->
+        <action id="cstools.reset" class="action.CompSciToolsAction"
+                text="Reset" description="Reset"
+                icon="ui.icons.CompSciToolsIcons.Reset">
+        </action>
+
+        <!-- The Pull button -->
+        <action id="cstools.pull" class="action.CompSciToolsAction"
+                text="Pull" description="Pull"
+                icon="ui.icons.CompSciToolsIcons.Pull">
+        </action>
+
+        <!-- The Push button -->
+        <action id="cstools.push" class="action.CompSciToolsAction"
+                text="Push" description="Push"
+                icon="ui.icons.CompSciToolsIcons.Push">
+        </action>
+
+        <!-- The Evaluate button -->
+        <action id="cstools.evaluate" class="action.CompSciToolsAction"
+                text="Evaluate" description="Evaluate"
+                icon="ui.icons.CompSciToolsIcons.Evaluate">
+        </action>
+
+    </actions>
+</idea-plugin>

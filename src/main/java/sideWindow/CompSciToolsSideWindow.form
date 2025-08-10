@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="sideWindow.CompSciToolsSideWindow">
+  <grid id="27dc6" binding="myToolWindowContent" layout-manager="BorderLayout" hgap="0" vgap="1">
+    <constraints>
+      <xy x="14" y="20" width="489" height="573"/>
+    </constraints>
+    <properties>
+      <foreground color="-12828863"/>
+      <preferredSize width="250" height="569"/>
+      <requestFocusEnabled value="true"/>
+    </properties>
+    <clientProperties>
+      <html.disable class="java.lang.Boolean" value="false"/>
+    </clientProperties>
+    <border type="line" title="" title-position="1">
+      <font/>
+      <color color="-13881809"/>
+    </border>
+    <children>
+      <grid id="258e8" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="Center"/>
+        <properties>
+          <minimumSize width="41" height="248"/>
+          <opaque value="false"/>
+          <preferredSize width="220" height="567"/>
+        </properties>
+        <border type="none">
+          <color color="-13881809"/>
+        </border>
+        <children>
+          <component id="23f1b" class="javax.swing.JTextPane" binding="exerciseNameTextPane">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <caretColor color="-1"/>
+              <disabledTextColor color="-16777216"/>
+              <dragEnabled value="false"/>
+              <editable value="false"/>
+              <enabled value="false"/>
+              <focusable value="false"/>
+              <font size="14"/>
+              <requestFocusEnabled value="false"/>
+              <text value="Placeholder Text"/>
+            </properties>
+          </component>
+          <tabbedpane id="fed17" binding="TabbedPane">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="3daa7" binding="descriptionPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <tabbedpane title="Description"/>
+                </constraints>
+                <properties>
+                  <minimumSize width="41" height="63"/>
+                  <preferredSize width="250" height="102"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="b7a5f" binding="descriptionScrollPane">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <autoscrolls value="false"/>
+                      <horizontalScrollBarPolicy value="31"/>
+                    </properties>
+                    <border type="none">
+                      <color color="-1716224"/>
+                    </border>
+                    <children>
+                      <component id="c06a8" class="javax.swing.JTextPane" binding="descriptionExercise">
+                        <constraints/>
+                        <properties>
+                          <contentType value="text/html"/>
+                          <editable value="false"/>
+                          <margin top="0" left="0" bottom="0" right="0"/>
+                          <minimumSize width="1" height="0"/>
+                          <text value="&lt;html&gt;&#10;  &lt;head&gt;&#10;    &#10;  &lt;/head&gt;&#10;  &lt;body&gt;&#10;  &lt;/body&gt;&#10;&lt;/html&gt;&#10;"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <component id="e311b" class="javax.swing.JTextPane" binding="wsText">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="120" height="-1"/>
+                        <preferred-size width="120" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                      <editable value="false"/>
+                      <margin top="0" left="10" bottom="0" right="0"/>
+                      <text value="Webservice URL :"/>
+                    </properties>
+                  </component>
+                  <component id="7e229" class="javax.swing.JTextField" binding="wsURL">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <margin top="2" left="9" bottom="2" right="6"/>
+                    </properties>
+                  </component>
+                  <component id="d1ba1" class="javax.swing.JButton" binding="reloadButton">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="4" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="130" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="Reload Window"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="445f5" binding="resultPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <tabbedpane title="Result"/>
+                </constraints>
+                <properties>
+                  <foreground color="-12828863"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <grid id="c7ecd" binding="layout2" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="799e8" class="javax.swing.JTextField" binding="gradeResult">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <editable value="false"/>
+                        </properties>
+                      </component>
+                      <component id="de52b" class="javax.swing.JTextField" binding="nbFailures">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="100" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <editable value="false"/>
+                          <horizontalAlignment value="0"/>
+                        </properties>
+                      </component>
+                      <component id="35cb4" class="javax.swing.JTextField" binding="nbTests">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="100" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <editable value="false"/>
+                          <horizontalAlignment value="0"/>
+                        </properties>
+                      </component>
+                      <component id="376ba" class="javax.swing.JProgressBar" binding="gradeProgressBar">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <foreground color="-14876888"/>
+                          <stringPainted value="true"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <splitpane id="776d6">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <dividerLocation value="302"/>
+                      <dividerSize value="4"/>
+                      <enabled value="true"/>
+                      <foreground color="-12828863"/>
+                      <orientation value="0"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <scrollpane id="68d96" binding="treeScrollPane">
+                        <constraints>
+                          <splitpane position="left"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="c3e07" class="javax.swing.JTree" binding="resultsTree" custom-create="true">
+                            <constraints/>
+                            <properties>
+                              <editable value="false"/>
+                              <focusable value="true"/>
+                              <rowHeight value="0"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                      <scrollpane id="a0dff" binding="messageScrollPane">
+                        <constraints>
+                          <splitpane position="right"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="32b40" class="javax.swing.JTextPane" binding="messageResult">
+                            <constraints/>
+                            <properties>
+                              <contentType value="text/html"/>
+                              <editable value="false"/>
+                              <text value="&lt;html&gt;&#10;  &lt;head&gt;&#10;    &#10;  &lt;/head&gt;&#10;  &lt;body&gt;&#10;  &lt;/body&gt;&#10;&lt;/html&gt;&#10;"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                    </children>
+                  </splitpane>
+                </children>
+              </grid>
+            </children>
+          </tabbedpane>
+          <toolbar id="5abae" binding="csToolBar">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <alignmentX value="0.0"/>
+              <autoscrolls value="false"/>
+              <background color="-13216140"/>
+              <borderPainted value="true"/>
+              <floatable value="false"/>
+              <foreground color="-12828863"/>
+              <inheritsPopupMenu value="false"/>
+              <margin top="0" left="0" bottom="0" right="0"/>
+              <maximumSize width="-1" height="-1"/>
+              <minimumSize width="-1" height="20"/>
+              <opaque value="false"/>
+            </properties>
+            <border type="line">
+              <font/>
+              <title-color color="-4473925"/>
+              <color color="-13881809"/>
+            </border>
+            <children/>
+          </toolbar>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor" id="d044a"/>
+  </inspectionSuppressions>
+</form>
