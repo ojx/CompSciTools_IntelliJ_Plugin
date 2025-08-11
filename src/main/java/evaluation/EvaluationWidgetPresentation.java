@@ -58,8 +58,7 @@ public class EvaluationWidgetPresentation implements StatusBarWidget.MultipleTex
         try {
             values = serv.getRJMC().callService(VPLService.VPL_GET_SUBRESTRICTIONS);
         } catch (VplConnectionException | MoodleWebServiceException e) {
-            System.out.println("Foook!");
-            e.printStackTrace();
+           // e.printStackTrace();
             freeEvaluations = null;
             nbEvaluations = null;
             reductionByEvaluation = null;

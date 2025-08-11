@@ -15,16 +15,16 @@
 
 package sideWindow;
 
-import com.intellij.ide.ui.UISettings;
-import com.intellij.ide.ui.UISettingsListener;
+import com.intellij.ide.ui.LafManager;
+import com.intellij.ide.ui.LafManagerListener;
 import com.intellij.ide.ui.laf.darcula.ui.DarculaProgressBarUI;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.ui.Gray;
 import com.intellij.ui.treeStructure.Tree;
-import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NotNull;
 import service.PersistentStorage;
 import service.ServiceGetter;
@@ -49,6 +49,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -153,41 +154,46 @@ public class CompSciToolsSideWindow {
         SimpleAttributeSet centerAttribute = new SimpleAttributeSet();
         StyleConstants.setAlignment(centerAttribute, StyleConstants.ALIGN_CENTER);
 
-        ApplicationManager.getApplication().getMessageBus().connect().subscribe(UISettingsListener.TOPIC, new UISettingsListener() {
+
+        ApplicationManager.getApplication().getMessageBus().connect().subscribe(LafManagerListener.TOPIC, new LafManagerListener() {
             @Override
-            public void uiSettingsChanged(@NotNull UISettings uiSettings) {
-         //       System.out.println("uiSettingsChanged");
-                descriptionExercise.setText(servGet.getDescription());
-                String currentResult = messageResult.getText();
+            public void lookAndFeelChanged(@NotNull LafManager lafManager) {
+                try {
+                    System.out.println("uiSettingsChanged");
+                    descriptionExercise.setText(servGet.getDescription());
+                    String currentResult = messageResult.getText();
 
-                final String style1 = "background-color: " + LIGHT_HEX;
-                final String style2 = "background-color: " + DARK_HEX;
+                    final String style1 = "background-color: " + LIGHT_HEX;
+                    final String style2 = "background-color: " + DARK_HEX;
 
-                int style1Index = currentResult.indexOf(style1);
-                int style2Index = currentResult.indexOf(style2);
+                    int style1Index = currentResult.indexOf(style1);
+                    int style2Index = currentResult.indexOf(style2);
 
-                String style;
+                    String style;
 
-                if (style1Index != -1 && style2Index != -1 && style1Index < style2Index) {
-                    style = style1;
-                } else if (style1Index != -1 && style2Index != -1) {
-                    style = style2;
-                } else if (style1Index != -1) {
-                    style = style1;
-                } else if (style2Index != -1) {
-                    style = style2;
-                } else {
-                    return;
-                }
+                    if (style1Index != -1 && style2Index != -1 && style1Index < style2Index) {
+                        style = style1;
+                    } else if (style1Index != -1 && style2Index != -1) {
+                        style = style2;
+                    } else if (style1Index != -1) {
+                        style = style1;
+                    } else if (style2Index != -1) {
+                        style = style2;
+                    } else {
+                        return;
+                    }
 
-                int styleIndex = currentResult.indexOf(style);
+                    int styleIndex = currentResult.indexOf(style);
 
-                if (styleIndex >= 0) {
-                    String newResult = currentResult.substring(0, styleIndex + style.length() - DARK_HEX.length());
-                    newResult += getHexBackgroundCode();
-                    newResult += currentResult.substring(styleIndex + style.length());
+                    if (styleIndex >= 0) {
+                        String newResult = currentResult.substring(0, styleIndex + style.length() - DARK_HEX.length());
+                        newResult += getHexBackgroundCode();
+                        newResult += currentResult.substring(styleIndex + style.length());
 
-                    messageResult.setText(newResult);
+                        messageResult.setText(newResult);
+                    }
+                } catch (Exception e) {
+                   // e.printStackTrace();
                 }
             }
         });
@@ -215,7 +221,8 @@ public class CompSciToolsSideWindow {
                         clearValidationError();
                     } else {
                         try {
-                            URL url = new URL(wsURL.getText());
+                            URI uri = URI.create(wsURL.getText());
+                            URL url = uri.toURL(); // Convert only after validation
                             if (url.getHost().toLowerCase().equals("compsci.tools")) {
                                 String queryString = url.getQuery();
                                 Map<String, String> params = new HashMap<>();
@@ -835,10 +842,8 @@ actionToolbar.getComponent().setBackground(new Color(54, 86, 116));
 
 
     private String getHexBackgroundCode() {
-        if (UIUtil.isUnderDarcula()) {
-            return DARK_HEX;
-        }
-
+        //if (UIUtil.isUnderDarcula()) {
+        if (EditorColorsManager.getInstance().isDarkEditor()) return DARK_HEX;
         return LIGHT_HEX;
     }
 

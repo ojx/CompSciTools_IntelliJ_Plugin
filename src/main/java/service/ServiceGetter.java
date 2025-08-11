@@ -15,9 +15,9 @@
 
 package service;
 
+import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ui.UIUtil;
 import module.CompSciToolsModuleBuilder;
 import vplwsclient.FileUtils;
 import vplwsclient.RestJsonMoodleClient;
@@ -102,13 +102,7 @@ public class ServiceGetter {
             return "<html>\n<head><style>p {font-family: sans-serif; font-size: small} body {padding: 3px 11px 2px 11px}</style></head><body><p>Security token has expired.</p><p>Please reconnect with the webservices URL.</p></body></html>";
         }
 
-        String hexCode;
-
-        if (UIUtil.isUnderDarcula()) {
-            hexCode = "#444444";
-        } else {
-            hexCode = "#F4F4F4";
-        }
+        String hexCode = EditorColorsManager.getInstance().isDarkEditor() ? "#444444" : "#F4F4F4";
 
         String intro = jsonInfo.getString("intro");
         return "<html>\n<head><style>pre {border: solid 1px #aaaaaa; border-radius: 5px; overflow-wrap: break-word; word-wrap: break-word; padding: 2px 5px; background-color: " + hexCode + "; white-space: pre-wrap;font-size: x-small;} body {padding: 3px 11px 2px 11px; font-family: sans-serif; font-size: small} div, p {font-family: sans-serif; font-size: small} </style></head>\n<body>\n" + intro + "\n</body>\n</html>";

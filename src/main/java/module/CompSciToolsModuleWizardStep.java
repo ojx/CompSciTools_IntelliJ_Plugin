@@ -27,6 +27,7 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -91,7 +92,8 @@ public class CompSciToolsModuleWizardStep extends com.intellij.ide.util.projectW
                     clearValidationError();
                 } else {
                     try {
-                        URL url = new URL(wsURL.getText());
+                        URI uri = URI.create(wsURL.getText());
+                        URL url = uri.toURL(); // Convert only after validation
                         if (url.getHost().toLowerCase().equals("compsci.tools")) {
                             String queryString = url.getQuery();
                             Map<String, String> params = new HashMap<>();

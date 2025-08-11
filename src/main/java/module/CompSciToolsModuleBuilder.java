@@ -190,7 +190,7 @@ public class CompSciToolsModuleBuilder extends com.intellij.ide.util.projectWiza
            // System.out.println(newName);
             path += File.separator + newName;
 
-            if (newName.equals("")) {
+            if (newName.isEmpty()) {
                 super.modifySettingsStep(settingsStep);
             }
 
@@ -217,7 +217,8 @@ public class CompSciToolsModuleBuilder extends com.intellij.ide.util.projectWiza
         ArrayList<String> jdkPaths = new ArrayList<>();
         ArrayList<Double> jdkVersions = new ArrayList<>();
         ArrayList<String> jdkNames = new ArrayList<>();
-        detector.detectSdks(SdkType.findByName("JavaSDK"), new ProgressIndicatorBase(), (sdkType, jdkName, jdkPath) -> {
+
+        detector.detectSdks(Objects.requireNonNull(SdkType.findByName("JavaSDK")), new ProgressIndicatorBase(), (sdkType, jdkName, jdkPath) -> {
                 /*System.out.println(sdkType);
                 System.out.println(jdkName);
                 System.out.println(jdkPath);*/
@@ -237,7 +238,7 @@ public class CompSciToolsModuleBuilder extends com.intellij.ide.util.projectWiza
             zulus.add(s.toLowerCase().contains("zulu"));
         });
 
-        if (jdkPaths.size() > 0) {
+        if (!jdkPaths.isEmpty()) {
             int best = -1;
             boolean zuluFound = false;
 
@@ -256,6 +257,10 @@ public class CompSciToolsModuleBuilder extends com.intellij.ide.util.projectWiza
             System.out.println("Best JDK Name: " + jdkNames.get(best));*/
             //  ProjectJdkTable.getInstance().
 
+            VirtualFile baseDir = model.getProject().getBasePath() != null
+                    ? LocalFileSystem.getInstance().findFileByPath(model.getProject().getBasePath())
+                    : null;
+
             // Sdk jdk = JavaSdk.getInstance().createJdk("java 1.8", jdkHomeDirectory(), false);
 
             List<Sdk> SDKs = ProjectJdkTable.getInstance().getSdksOfType(Objects.requireNonNull(SdkType.findByName("JavaSDK")));
@@ -273,7 +278,11 @@ public class CompSciToolsModuleBuilder extends com.intellij.ide.util.projectWiza
 
                     model.setSdk(sdk);
                     ProjectRootManager.getInstance(model.getProject()).setProjectSdk(sdk);
-                    FileBasedIndex.getInstance().requestReindex(model.getProject().getBaseDir());
+
+                    if (baseDir != null) {
+                        FileBasedIndex.getInstance().requestReindex(baseDir);
+                    }
+
                   //  VirtualFileManager.getInstance().syncRefresh();
                     //or LocalFileSystem.getInstance().refreshAndFindFileByPath()
                     break;
@@ -287,8 +296,10 @@ public class CompSciToolsModuleBuilder extends com.intellij.ide.util.projectWiza
                 model.setSdk(sdk);
                 ProjectRootManager.getInstance(model.getProject()).setProjectSdk(sdk);
 
-              //  System.out.println(model.getProject().getBaseDir());
-                FileBasedIndex.getInstance().requestReindex(model.getProject().getBaseDir());
+                if (baseDir != null) {
+                    FileBasedIndex.getInstance().requestReindex(baseDir);
+                }
+
 
              //   VirtualFileManager.getInstance().syncRefresh(); // This worked I think
                //or  LocalFileSystem.getInstance().refreshAndFindFileByPath();
